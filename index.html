@@ -141,17 +141,18 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
     .sub-section-title {
-      font-size: 20px;
-      color: #34495e;
-      margin: 25px 0 15px 0;
-      padding: 12px 20px;
-      background: linear-gradient(135deg, #3498db, #2980b9);
+      font-size: 22px;
       color: white;
-      border-radius: 6px;
+      margin: 25px 0 15px 0;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, #000000, #333333);
+      color: white;
+      border-radius: 8px;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      letter-spacing: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
     }
     table {
       width: 100%;
@@ -317,6 +318,35 @@
       border-color: #4caf50;
       box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
     }
+    .history-table {
+      margin-top: 20px;
+    }
+    .history-table th {
+      background: linear-gradient(135deg, #424242, #212121);
+    }
+    .sold-stock {
+      background-color: #f8f9fa;
+      opacity: 0.9;
+    }
+    .stock-status {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    .status-active {
+      background-color: #27ae60;
+      color: white;
+    }
+    .status-sold {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .status-partial {
+      background-color: #f39c12;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -434,20 +464,23 @@
     </tbody>
   </table>
   
-  <div class="section-title">Ανάλυση Ανά Μετοχή</div>
-  <table id="mitsos-stock-analysis">
+  <div class="section-title">Πλήρες Ιστορικό Ανά Μετοχή</div>
+  <table id="mitsos-stock-history" class="history-table">
     <thead>
       <tr>
         <th>Μετοχή</th>
+        <th>Κατάσταση</th>
+        <th>Συνολικά Αγορασμένα Τεμάχια</th>
+        <th>Συνολικά Πωλημένα Τεμάχια</th>
         <th>Τεμάχια που Κρατούνται</th>
         <th>Συνολικό Κόστος Αγοράς (€)</th>
-        <th>Τρέχουσα Αξία (€)</th>
-        <th>Μέρισμα (€)</th>
-        <th>Κέρδος/Ζημία (€)</th>
-        <th>Ποσοστό Κέρδους/Ζημίας (%)</th>
+        <th>Συνολικό Μέρισμα (€)</th>
+        <th>Συνολικές Καθαρές Εισπράξεις Πωλήσεων (€)</th>
+        <th>Τελικό Κέρδος/Ζημία (€)</th>
+        <th>Τελικό Ποσοστό Κέρδους/Ζημίας (%)</th>
       </tr>
     </thead>
-    <tbody id="mitsos-stock-analysis-body">
+    <tbody id="mitsos-stock-history-body">
     </tbody>
   </table>
 </div>
@@ -556,20 +589,23 @@
     </tbody>
   </table>
   
-  <div class="section-title">Ανάλυση Ανά Μετοχή</div>
-  <table id="aderfoula-stock-analysis">
+  <div class="section-title">Πλήρες Ιστορικό Ανά Μετοχή</div>
+  <table id="aderfoula-stock-history" class="history-table">
     <thead>
       <tr>
         <th>Μετοχή</th>
+        <th>Κατάσταση</th>
+        <th>Συνολικά Αγορασμένα Τεμάχια</th>
+        <th>Συνολικά Πωλημένα Τεμάχια</th>
         <th>Τεμάχια που Κρατούνται</th>
         <th>Συνολικό Κόστος Αγοράς (€)</th>
-        <th>Τρέχουσα Αξία (€)</th>
-        <th>Μέρισμα (€)</th>
-        <th>Κέρδος/Ζημία (€)</th>
-        <th>Ποσοστό Κέρδους/Ζημίας (%)</th>
+        <th>Συνολικό Μέρισμα (€)</th>
+        <th>Συνολικές Καθαρές Εισπράξεις Πωλήσεων (€)</th>
+        <th>Τελικό Κέρδος/Ζημία (€)</th>
+        <th>Τελικό Ποσοστό Κέρδους/Ζημίας (%)</th>
       </tr>
     </thead>
-    <tbody id="aderfoula-stock-analysis-body">
+    <tbody id="aderfoula-stock-history-body">
     </tbody>
   </table>
 </div>
@@ -678,20 +714,23 @@
     </tbody>
   </table>
   
-  <div class="section-title">Ανάλυση Ανά Μετοχή</div>
-  <table id="father-stock-analysis">
+  <div class="section-title">Πλήρες Ιστορικό Ανά Μετοχή</div>
+  <table id="father-stock-history" class="history-table">
     <thead>
       <tr>
         <th>Μετοχή</th>
+        <th>Κατάσταση</th>
+        <th>Συνολικά Αγορασμένα Τεμάχια</th>
+        <th>Συνολικά Πωλημένα Τεμάχια</th>
         <th>Τεμάχια που Κρατούνται</th>
         <th>Συνολικό Κόστος Αγοράς (€)</th>
-        <th>Τρέχουσα Αξία (€)</th>
-        <th>Μέρισμα (€)</th>
-        <th>Κέρδος/Ζημία (€)</th>
-        <th>Ποσοστό Κέρδους/Ζημίας (%)</th>
+        <th>Συνολικό Μέρισμα (€)</th>
+        <th>Συνολικές Καθαρές Εισπράξεις Πωλήσεων (€)</th>
+        <th>Τελικό Κέρδος/Ζημία (€)</th>
+        <th>Τελικό Ποσοστό Κέρδους/Ζημίας (%)</th>
       </tr>
     </thead>
-    <tbody id="father-stock-analysis-body">
+    <tbody id="father-stock-history-body">
     </tbody>
   </table>
 </div>
@@ -859,7 +898,7 @@ function deleteRow(button, portfolio, type) {
   calculatePortfolio(portfolio);
 }
 
-// Υπολογισμός πορτοφολίου με ανάλυση ανά μετοχή
+// Υπολογισμός πορτοφολίου με πλήρες ιστορικό
 function calculatePortfolio(portfolio) {
   let totalPurchaseQty = 0;
   let totalPurchaseValue = 0;
@@ -876,8 +915,8 @@ function calculatePortfolio(portfolio) {
   let totalSalePriceSum = 0;
   let totalSalePL = 0;
   
-  // Αντικείμενο για παρακολούθηση μετοχών
-  const stocks = {};
+  // Αντικείμενο για παρακολούθηση πλήρους ιστορικού μετοχών
+  const stockHistory = {};
   
   // Υπολογισμός αγορών
   const purchaseRows = document.querySelectorAll(`#${portfolio}-purchases tbody tr`);
@@ -905,26 +944,33 @@ function calculatePortfolio(portfolio) {
     totalCurrentValue += currentValue;
     totalDividends += dividend;
     
-    // Καταγραφή μετοχής
+    // Καταγραφή αγοράς στο ιστορικό μετοχής
     if (stockName) {
-      if (!stocks[stockName]) {
-        stocks[stockName] = {
-          purchaseQty: 0,
-          purchaseValue: 0,
-          purchaseCost: 0,
-          currentValue: 0,
-          dividends: 0
+      if (!stockHistory[stockName]) {
+        stockHistory[stockName] = {
+          totalPurchasedQty: 0,
+          totalSoldQty: 0,
+          totalPurchaseCost: 0,
+          totalDividends: 0,
+          totalSaleProceeds: 0,
+          purchases: [],
+          sales: []
         };
       }
-      stocks[stockName].purchaseQty += qty;
-      stocks[stockName].purchaseValue += purchaseValue;
-      stocks[stockName].purchaseCost += totalCost;
-      stocks[stockName].currentValue += currentValue;
-      stocks[stockName].dividends += dividend;
+      stockHistory[stockName].totalPurchasedQty += qty;
+      stockHistory[stockName].totalPurchaseCost += totalCost;
+      stockHistory[stockName].totalDividends += dividend;
+      stockHistory[stockName].purchases.push({
+        qty: qty,
+        price: price,
+        commission: commission,
+        totalCost: totalCost,
+        dividend: dividend
+      });
     }
   });
   
-  // Υπολογισμός πωλήσεων και αφαίρεση από τα αποθέματα
+  // Υπολογισμός πωλήσεων
   const saleRows = document.querySelectorAll(`#${portfolio}-sales tbody tr`);
   saleRows.forEach(row => {
     const stockName = row.querySelector('.sale-stock-name').value.trim();
@@ -944,28 +990,27 @@ function calculatePortfolio(portfolio) {
     totalNetProceeds += netProceeds;
     totalSalePriceSum += price;
     
-    // Αφαίρεση από τα αποθέματα της μετοχής
-    if (stockName && stocks[stockName]) {
-      if (stocks[stockName].purchaseQty >= qty) {
-        // Υπολογισμός αναλογικού κόστους για τα πωλούμενα τεμάχια
-        const costRatio = qty / stocks[stockName].purchaseQty;
-        const soldCost = stocks[stockName].purchaseCost * costRatio;
-        const soldCurrentValue = stocks[stockName].currentValue * costRatio;
-        const soldDividends = stocks[stockName].dividends * costRatio;
-        
-        stocks[stockName].purchaseQty -= qty;
-        stocks[stockName].purchaseCost -= soldCost;
-        stocks[stockName].currentValue -= soldCurrentValue;
-        stocks[stockName].dividends -= soldDividends;
-        
-        // Υπολογισμός κέρδους/ζημίας για αυτή τη πώληση
-        const avgPurchasePrice = stocks[stockName].purchaseQty > 0 ? 
-          stocks[stockName].purchaseCost / stocks[stockName].purchaseQty : 0;
-        const pl = netProceeds - (qty * avgPurchasePrice);
-        totalSalePL += pl;
-        
-        row.querySelector('.pl').innerHTML = `<span class="${pl >= 0 ? 'profit' : 'loss'}">${pl.toFixed(2)}</span>`;
+    // Καταγραφή πώλησης στο ιστορικό μετοχής
+    if (stockName) {
+      if (!stockHistory[stockName]) {
+        stockHistory[stockName] = {
+          totalPurchasedQty: 0,
+          totalSoldQty: 0,
+          totalPurchaseCost: 0,
+          totalDividends: 0,
+          totalSaleProceeds: 0,
+          purchases: [],
+          sales: []
+        };
       }
+      stockHistory[stockName].totalSoldQty += qty;
+      stockHistory[stockName].totalSaleProceeds += netProceeds;
+      stockHistory[stockName].sales.push({
+        qty: qty,
+        price: price,
+        commission: commission,
+        netProceeds: netProceeds
+      });
     }
   });
   
@@ -975,6 +1020,43 @@ function calculatePortfolio(portfolio) {
   // Υπολογισμός μέσης τιμής αγοράς
   const avgPurchasePrice = totalPurchaseQty > 0 ? totalPurchaseValue / totalPurchaseQty : 0;
   const avgSalePrice = totalSaleQty > 0 ? totalSaleValue / totalSaleQty : 0;
+  
+  // Υπολογισμός συνολικού κέρδους/ζημίας με FIFO (First In First Out) μέθοδο
+  Object.keys(stockHistory).forEach(stockName => {
+    const stock = stockHistory[stockName];
+    
+    // Υπολογισμός κέρδους/ζημίας με FIFO
+    let remainingShares = stock.totalPurchasedQty;
+    let remainingCost = stock.totalPurchaseCost;
+    let soldShares = 0;
+    
+    // Ταξινόμηση αγορών κατά ημερομηνία (FIFO)
+    stock.purchases.sort((a, b) => a.date - b.date);
+    
+    // Για κάθε πώληση
+    stock.sales.forEach(sale => {
+      let sharesToSell = sale.qty;
+      let costOfSharesSold = 0;
+      
+      // Αφαίρεση με FIFO
+      for (let i = 0; i < stock.purchases.length && sharesToSell > 0; i++) {
+        const purchase = stock.purchases[i];
+        if (purchase.qty > 0) {
+          const sharesFromThisPurchase = Math.min(purchase.qty, sharesToSell);
+          const costPerShare = purchase.totalCost / purchase.qty;
+          costOfSharesSold += sharesFromThisPurchase * costPerShare;
+          
+          purchase.qty -= sharesFromThisPurchase;
+          sharesToSell -= sharesFromThisPurchase;
+          soldShares += sharesFromThisPurchase;
+        }
+      }
+      
+      // Υπολογισμός κέρδους/ζημίας για αυτή τη πώληση
+      const plForSale = sale.netProceeds - costOfSharesSold;
+      totalSalePL += plForSale;
+    });
+  });
   
   // Συνολικό κέρδος/ζημία (συμπεριλαμβανομένων μερισμάτων)
   const totalPL = totalCurrentValue + totalNetProceeds + totalDividends - totalPurchaseCost;
@@ -1009,8 +1091,8 @@ function calculatePortfolio(portfolio) {
   document.getElementById(`${portfolio}-total-PL`).innerHTML = `<span class="${totalPL >= 0 ? 'profit' : 'loss'}">${totalPL.toFixed(2)}</span>`;
   document.getElementById(`${portfolio}-total-PLPercent`).innerHTML = `<span class="${totalPLPercent >= 0 ? 'profit' : 'loss'}">${totalPLPercent.toFixed(2)}%</span>`;
   
-  // Ενημέρωση ανάλυσης ανά μετοχή
-  updateStockAnalysis(portfolio, stocks);
+  // Ενημέρωση πλήρους ιστορικού ανά μετοχή
+  updateStockHistory(portfolio, stockHistory);
   
   // Αποθήκευση
   savePortfolioData(portfolio);
@@ -1019,30 +1101,52 @@ function calculatePortfolio(portfolio) {
   updateSummary();
 }
 
-// Ενημέρωση ανάλυσης ανά μετοχή
-function updateStockAnalysis(portfolio, stocks) {
-  const tbody = document.getElementById(`${portfolio}-stock-analysis-body`);
+// Ενημέρωση πλήρους ιστορικού ανά μετοχή
+function updateStockHistory(portfolio, stockHistory) {
+  const tbody = document.getElementById(`${portfolio}-stock-history-body`);
   tbody.innerHTML = '';
   
-  Object.keys(stocks).forEach(stockName => {
-    const stock = stocks[stockName];
-    if (stock.purchaseQty > 0) {
-      const row = document.createElement('tr');
-      const pl = stock.currentValue + stock.dividends - stock.purchaseCost;
-      const plPercent = stock.purchaseCost > 0 ? (pl / stock.purchaseCost * 100) : 0;
-      
-      row.innerHTML = `
-        <td><strong>${stockName}</strong></td>
-        <td>${stock.purchaseQty}</td>
-        <td>${stock.purchaseCost.toFixed(2)}</td>
-        <td>${stock.currentValue.toFixed(2)}</td>
-        <td>${stock.dividends.toFixed(2)}</td>
-        <td><span class="${pl >= 0 ? 'profit' : 'loss'}">${pl.toFixed(2)}</span></td>
-        <td><span class="${plPercent >= 0 ? 'profit' : 'loss'}">${plPercent.toFixed(2)}%</span></td>
-      `;
-      
-      tbody.appendChild(row);
+  Object.keys(stockHistory).forEach(stockName => {
+    const stock = stockHistory[stockName];
+    const heldShares = stock.totalPurchasedQty - stock.totalSoldQty;
+    
+    // Προσδιορισμός κατάστασης
+    let status = '';
+    let statusClass = '';
+    if (heldShares === 0 && stock.totalPurchasedQty > 0) {
+      status = 'ΠΩΛΗΘΗΚΕ ΟΛΟΚΛΗΡΩΤΙΚΑ';
+      statusClass = 'status-sold';
+    } else if (heldShares > 0 && stock.totalSoldQty > 0) {
+      status = 'ΜΕΡΙΚΗ ΠΩΛΗΣΗ';
+      statusClass = 'status-partial';
+    } else if (heldShares > 0) {
+      status = 'ΕΝΕΡΓΗ';
+      statusClass = 'status-active';
     }
+    
+    // Υπολογισμός τελικού κέρδους/ζημίας
+    const totalPL = stock.totalSaleProceeds + stock.totalDividends - stock.totalPurchaseCost;
+    const totalPLPercent = stock.totalPurchaseCost > 0 ? (totalPL / stock.totalPurchaseCost * 100) : 0;
+    
+    const row = document.createElement('tr');
+    if (heldShares === 0) {
+      row.classList.add('sold-stock');
+    }
+    
+    row.innerHTML = `
+      <td><strong>${stockName}</strong></td>
+      <td><span class="stock-status ${statusClass}">${status}</span></td>
+      <td>${stock.totalPurchasedQty}</td>
+      <td>${stock.totalSoldQty}</td>
+      <td>${heldShares}</td>
+      <td>${stock.totalPurchaseCost.toFixed(2)}</td>
+      <td>${stock.totalDividends.toFixed(2)}</td>
+      <td>${stock.totalSaleProceeds.toFixed(2)}</td>
+      <td><span class="${totalPL >= 0 ? 'profit' : 'loss'}">${totalPL.toFixed(2)}</span></td>
+      <td><span class="${totalPLPercent >= 0 ? 'profit' : 'loss'}">${totalPLPercent.toFixed(2)}%</span></td>
+    `;
+    
+    tbody.appendChild(row);
   });
 }
 
