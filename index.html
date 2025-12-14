@@ -205,6 +205,24 @@
     input[type="date"] {
       text-align: center;
     }
+    .commission-input {
+      background-color: #fff8e1;
+      border-color: #ffd54f;
+      font-style: italic;
+    }
+    .commission-input:focus {
+      border-color: #ffb300;
+      box-shadow: 0 0 0 3px rgba(255, 183, 0, 0.2);
+    }
+    .sale-commission-input {
+      background-color: #ffebee;
+      border-color: #ef9a9a;
+      font-style: italic;
+    }
+    .sale-commission-input:focus {
+      border-color: #e57373;
+      box-shadow: 0 0 0 3px rgba(229, 115, 115, 0.2);
+    }
     .summary {
       margin-top: 30px;
       background: linear-gradient(135deg, #fff, #f8f9fa);
@@ -347,6 +365,134 @@
       background-color: #f39c12;
       color: white;
     }
+    .no-pl {
+      color: #7f8c8d;
+      font-style: italic;
+    }
+    .owner-mitsos {
+      background-color: #FFD700;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .owner-aderfoula {
+      background-color: #2196F3;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .owner-father {
+      background-color: #424242;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .fully-sold-row {
+      background-color: #e74c3c !important;
+      color: white !important;
+      font-weight: bold;
+    }
+    .fully-sold-row td {
+      color: white !important;
+      font-weight: bold;
+    }
+    
+    /* ΝΕΑ STYLES ΓΙΑ ΤΙΣ ΑΛΛΑΓΕΣ */
+    
+    /* Bold κέρδη/ζημίες */
+    .final-pl {
+        font-size: 18px !important;
+        font-weight: 900 !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3) !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .final-pl-profit {
+        color: #00ff00 !important;
+        background-color: rgba(0, 255, 0, 0.1) !important;
+        padding: 5px !important;
+        border-radius: 4px !important;
+        font-weight: 900 !important;
+        font-size: 16px !important;
+    }
+
+    .final-pl-loss {
+        color: #ff4444 !important;
+        background-color: rgba(255, 68, 68, 0.1) !important;
+        padding: 5px !important;
+        border-radius: 4px !important;
+        font-weight: 900 !important;
+        font-size: 16px !important;
+    }
+
+    /* Στυλ για τις γραμμές αγορών - ΜΑΥΡΟ ΦΟΝΤΟ */
+    .purchase-header-row {
+        background: linear-gradient(135deg, #000000, #333333) !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    .purchase-header-row th {
+        color: white !important;
+        font-weight: bold !important;
+        background: linear-gradient(135deg, #000000, #333333) !important;
+    }
+
+    /* Στυλ για τις γραμμές πωλήσεων - ΚΟΚΚΙΝΟ ΦΟΝΤΟ */
+    .sale-header-row {
+        background: linear-gradient(135deg, #8B0000, #B22222) !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    .sale-header-row th {
+        color: white !important;
+        font-weight: bold !important;
+        background: linear-gradient(135deg, #8B0000, #B22222) !important;
+    }
+
+    /* Bold σύνολα αγορών */
+    .purchase-totals-row {
+        background: linear-gradient(135deg, #000000, #333333) !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    .purchase-totals-row td {
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    /* Bold σύνολα πωλήσεων */
+    .sale-totals-row {
+        background: linear-gradient(135deg, #8B0000, #B22222) !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    .sale-totals-row td {
+        color: white !important;
+        font-weight: bold !important;
+    }
+    
+    /* Μεγαλύτερη γραμματοσειρά για κέρδη/ζημίες */
+    .bold-pl {
+        font-size: 18px !important;
+        font-weight: 900 !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3) !important;
+    }
+    
+    /* Χωριστές γραμμές για κάθε κάτοχο στο summary */
+    .separate-owner-row {
+        border-bottom: 2px solid #ddd;
+    }
+    
+    .separate-owner-row td {
+        padding: 10px !important;
+    }
   </style>
 </head>
 <body>
@@ -373,7 +519,7 @@
   <div class="sub-section-title">ΑΓΟΡΕΣ</div>
   <table id="mitsos-purchases">
     <thead>
-      <tr>
+      <tr class="purchase-header-row">
         <th>Α/Α</th>
         <th>Ημερομηνία Αγοράς</th>
         <th>Όνομα Μετοχής</th>
@@ -391,7 +537,7 @@
     </thead>
     <tbody></tbody>
     <tfoot>
-      <tr class="totals-row">
+      <tr class="purchase-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΑΓΟΡΩΝ:</strong></td>
         <td id="mitsos-total-purchase-qty">0</td>
         <td id="mitsos-avg-purchase-price">0.00</td>
@@ -410,7 +556,7 @@
   <div class="sub-section-title">ΠΩΛΗΣΕΙΣ</div>
   <table id="mitsos-sales">
     <thead>
-      <tr>
+      <tr class="sale-header-row">
         <th>Α/Α</th>
         <th>Ημερομηνία Πώλησης</th>
         <th>Όνομα Μετοχής</th>
@@ -425,7 +571,7 @@
     </thead>
     <tbody></tbody>
     <tfoot>
-      <tr class="totals-row">
+      <tr class="sale-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΠΩΛΗΣΕΩΝ:</strong></td>
         <td id="mitsos-total-sale-qty">0</td>
         <td id="mitsos-avg-sale-price">0.00</td>
@@ -458,8 +604,8 @@
         <td id="mitsos-total-cost">0.00</td>
         <td id="mitsos-current-value">0.00</td>
         <td id="mitsos-total-dividends-sum">0.00</td>
-        <td id="mitsos-total-PL">0.00</td>
-        <td id="mitsos-total-PLPercent">0.00%</td>
+        <td id="mitsos-total-PL" class="bold-pl">0.00</td>
+        <td id="mitsos-total-PLPercent" class="bold-pl">0.00%</td>
       </tr>
     </tbody>
   </table>
@@ -483,6 +629,24 @@
     <tbody id="mitsos-stock-history-body">
     </tbody>
   </table>
+  
+  <div class="section-title">Πλήρες Ιστορικό Ανά Μετοχή (ΠΩΛΗΘΕΙΣΕΣ ΟΛΟΚΛΗΡΩΤΙΚΑ)</div>
+  <table id="mitsos-sold-stock-history" class="history-table">
+    <thead>
+      <tr>
+        <th>Μετοχή</th>
+        <th>Συνολικά Αγορασμένα Τεμάχια</th>
+        <th>Συνολικά Πωλημένα Τεμάχια</th>
+        <th>Συνολικό Κόστος Αγοράς (€)</th>
+        <th>Συνολικό Μέρισμα (€)</th>
+        <th>Συνολικές Καθαρές Εισπράξεις Πωλήσεων (€)</th>
+        <th>Τελικό Κέρδος/Ζημία (€)</th>
+        <th>Τελικό Ποσοστό Κέρδους/Ζημίας (%)</th>
+      </tr>
+    </thead>
+    <tbody id="mitsos-sold-stock-history-body">
+    </tbody>
+  </table>
 </div>
 
 <div id="aderfoula-portfolio" class="portfolio-content hidden">
@@ -498,7 +662,7 @@
   <div class="sub-section-title">ΑΓΟΡΕΣ</div>
   <table id="aderfoula-purchases">
     <thead>
-      <tr>
+      <tr class="purchase-header-row">
         <th>Α/Α</th>
         <th>Ημερομηνία Αγοράς</th>
         <th>Όνομα Μετοχής</th>
@@ -516,7 +680,7 @@
     </thead>
     <tbody></tbody>
     <tfoot>
-      <tr class="totals-row">
+      <tr class="purchase-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΑΓΟΡΩΝ:</strong></td>
         <td id="aderfoula-total-purchase-qty">0</td>
         <td id="aderfoula-avg-purchase-price">0.00</td>
@@ -535,7 +699,7 @@
   <div class="sub-section-title">ΠΩΛΗΣΕΙΣ</div>
   <table id="aderfoula-sales">
     <thead>
-      <tr>
+      <tr class="sale-header-row">
         <th>Α/Α</th>
         <th>Ημερομηνία Πώλησης</th>
         <th>Όνομα Μετοχής</th>
@@ -550,7 +714,7 @@
     </thead>
     <tbody></tbody>
     <tfoot>
-      <tr class="totals-row">
+      <tr class="sale-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΠΩΛΗΣΕΩΝ:</strong></td>
         <td id="aderfoula-total-sale-qty">0</td>
         <td id="aderfoula-avg-sale-price">0.00</td>
@@ -583,8 +747,8 @@
         <td id="aderfoula-total-cost">0.00</td>
         <td id="aderfoula-current-value">0.00</td>
         <td id="aderfoula-total-dividends-sum">0.00</td>
-        <td id="aderfoula-total-PL">0.00</td>
-        <td id="aderfoula-total-PLPercent">0.00%</td>
+        <td id="aderfoula-total-PL" class="bold-pl">0.00</td>
+        <td id="aderfoula-total-PLPercent" class="bold-pl">0.00%</td>
       </tr>
     </tbody>
   </table>
@@ -608,6 +772,24 @@
     <tbody id="aderfoula-stock-history-body">
     </tbody>
   </table>
+  
+  <div class="section-title">Πλήρες Ιστορικό Ανά Μετοχή (ΠΩΛΗΘΕΙΣΕΣ ΟΛΟΚΛΗΡΩΤΙΚΑ)</div>
+  <table id="aderfoula-sold-stock-history" class="history-table">
+    <thead>
+      <tr>
+        <th>Μετοχή</th>
+        <th>Συνολικά Αγορασμένα Τεμάχια</th>
+        <th>Συνολικά Πωλημένα Τεμάχια</th>
+        <th>Συνολικό Κόστος Αγοράς (€)</th>
+        <th>Συνολικό Μέρισμα (€)</th>
+        <th>Συνολικές Καθαρές Εισπράξεις Πωλήσεων (€)</th>
+        <th>Τελικό Κέρδος/Ζημία (€)</th>
+        <th>Τελικό Ποσοστό Κέρδους/Ζημίας (%)</th>
+      </tr>
+    </thead>
+    <tbody id="aderfoula-sold-stock-history-body">
+    </tbody>
+  </table>
 </div>
 
 <div id="father-portfolio" class="portfolio-content hidden">
@@ -623,7 +805,7 @@
   <div class="sub-section-title">ΑΓΟΡΕΣ</div>
   <table id="father-purchases">
     <thead>
-      <tr>
+      <tr class="purchase-header-row">
         <th>Α/Α</th>
         <th>Ημερομηνία Αγοράς</th>
         <th>Όνομα Μετοχής</th>
@@ -641,7 +823,7 @@
     </thead>
     <tbody></tbody>
     <tfoot>
-      <tr class="totals-row">
+      <tr class="purchase-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΑΓΟΡΩΝ:</strong></td>
         <td id="father-total-purchase-qty">0</td>
         <td id="father-avg-purchase-price">0.00</td>
@@ -660,7 +842,7 @@
   <div class="sub-section-title">ΠΩΛΗΣΕΙΣ</div>
   <table id="father-sales">
     <thead>
-      <tr>
+      <tr class="sale-header-row">
         <th>Α/Α</th>
         <th>Ημερομηνία Πώλησης</th>
         <th>Όνομα Μετοχής</th>
@@ -675,7 +857,7 @@
     </thead>
     <tbody></tbody>
     <tfoot>
-      <tr class="totals-row">
+      <tr class="sale-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΠΩΛΗΣΕΩΝ:</strong></td>
         <td id="father-total-sale-qty">0</td>
         <td id="father-avg-sale-price">0.00</td>
@@ -708,8 +890,8 @@
         <td id="father-total-cost">0.00</td>
         <td id="father-current-value">0.00</td>
         <td id="father-total-dividends-sum">0.00</td>
-        <td id="father-total-PL">0.00</td>
-        <td id="father-total-PLPercent">0.00%</td>
+        <td id="father-total-PL" class="bold-pl">0.00</td>
+        <td id="father-total-PLPercent" class="bold-pl">0.00%</td>
       </tr>
     </tbody>
   </table>
@@ -733,11 +915,30 @@
     <tbody id="father-stock-history-body">
     </tbody>
   </table>
+  
+  <div class="section-title">Πλήρες Ιστορικό Ανά Μετοχή (ΠΩΛΗΘΕΙΣΕΣ ΟΛΟΚΛΗΡΩΤΙΚΑ)</div>
+  <table id="father-sold-stock-history" class="history-table">
+    <thead>
+      <tr>
+        <th>Μετοχή</th>
+        <th>Συνολικά Αγορασμένα Τεμάχια</th>
+        <th>Συνολικά Πωλημένα Τεμάχια</th>
+        <th>Συνολικό Κόστος Αγοράς (€)</th>
+        <th>Συνολικό Μέρισμα (€)</th>
+        <th>Συνολικές Καθαρές Εισπράξεις Πωλήσεων (€)</th>
+        <th>Τελικό Κέρδος/Ζημία (€)</th>
+        <th>Τελικό Ποσοστό Κέρδους/Ζημίας (%)</th>
+      </tr>
+    </thead>
+    <tbody id="father-sold-stock-history-body">
+    </tbody>
+  </table>
 </div>
 
 <div id="summary-portfolio" class="portfolio-content hidden">
   <div class="section-title">📊 ΣΥΝΟΨΗ ΟΛΩΝ ΤΩΝ ΠΟΡΤΟΦΟΛΙΩΝ</div>
   
+  <div class="sub-section-title">Σύνολα Αναλυτικά</div>
   <table id="summary-table">
     <thead>
       <tr>
@@ -752,35 +953,35 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><strong>ΜΗΤΣΟΣ</strong></td>
+      <tr class="separate-owner-row">
+        <td><span class="owner-mitsos">ΜΗΤΣΟΣ</span></td>
         <td id="summary-mitsos-held">0</td>
         <td id="summary-mitsos-cost">0.00</td>
         <td id="summary-mitsos-proceeds">0.00</td>
         <td id="summary-mitsos-current">0.00</td>
         <td id="summary-mitsos-dividends">0.00</td>
-        <td id="summary-mitsos-pl">0.00</td>
-        <td id="summary-mitsos-plpercent">0.00%</td>
+        <td id="summary-mitsos-pl" class="bold-pl">0.00</td>
+        <td id="summary-mitsos-plpercent" class="bold-pl">0.00%</td>
       </tr>
-      <tr>
-        <td><strong>ΑΔΕΡΦΟΥΛΑ</strong></td>
+      <tr class="separate-owner-row">
+        <td><span class="owner-aderfoula">ΑΔΕΡΦΟΥΛΑ</span></td>
         <td id="summary-aderfoula-held">0</td>
         <td id="summary-aderfoula-cost">0.00</td>
         <td id="summary-aderfoula-proceeds">0.00</td>
         <td id="summary-aderfoula-current">0.00</td>
         <td id="summary-aderfoula-dividends">0.00</td>
-        <td id="summary-aderfoula-pl">0.00</td>
-        <td id="summary-aderfoula-plpercent">0.00%</td>
+        <td id="summary-aderfoula-pl" class="bold-pl">0.00</td>
+        <td id="summary-aderfoula-plpercent" class="bold-pl">0.00%</td>
       </tr>
-      <tr>
-        <td><strong>FATHER</strong></td>
+      <tr class="separate-owner-row">
+        <td><span class="owner-father">FATHER</span></td>
         <td id="summary-father-held">0</td>
         <td id="summary-father-cost">0.00</td>
         <td id="summary-father-proceeds">0.00</td>
         <td id="summary-father-current">0.00</td>
         <td id="summary-father-dividends">0.00</td>
-        <td id="summary-father-pl">0.00</td>
-        <td id="summary-father-plpercent">0.00%</td>
+        <td id="summary-father-pl" class="bold-pl">0.00</td>
+        <td id="summary-father-plpercent" class="bold-pl">0.00%</td>
       </tr>
       <tr class="calculations-row">
         <td><strong>ΣΥΝΟΛΟ</strong></td>
@@ -789,9 +990,40 @@
         <td id="summary-total-proceeds">0.00</td>
         <td id="summary-total-current">0.00</td>
         <td id="summary-total-dividends">0.00</td>
-        <td id="summary-total-pl">0.00</td>
-        <td id="summary-total-plpercent">0.00%</td>
+        <td id="summary-total-pl" class="bold-pl">0.00</td>
+        <td id="summary-total-plpercent" class="bold-pl">0.00%</td>
       </tr>
+    </tbody>
+  </table>
+  
+  <div class="sub-section-title">Σύνολο Μετοχών Ανά Κάτοχο</div>
+  <table id="summary-stocks-by-owner">
+    <thead>
+      <tr>
+        <th>Κάτοχος</th>
+        <th>Πλήθος Μετοχών (Μοναδικές)</th>
+        <th>Συνολικά Τεμάχια που Κρατούνται</th>
+        <th>Συνολικό Κόστος Αγοράς (€)</th>
+        <th>Συνολική Τρέχουσα Αξία (€)</th>
+      </tr>
+    </thead>
+    <tbody id="summary-stocks-by-owner-body">
+    </tbody>
+  </table>
+  
+  <div class="sub-section-title">Σύνολο Μετοχών Ανά Όνομα Μετοχής</div>
+  <table id="summary-stocks-by-name">
+    <thead>
+      <tr>
+        <th>Μετοχή</th>
+        <th>Κάτοχος</th>
+        <th>Τεμάχια που Κρατούνται</th>
+        <th>Συνολικό Κόστος Αγοράς (€)</th>
+        <th>Τρέχουσα Αξία (€)</th>
+        <th>Μέρισμα (€)</th>
+      </tr>
+    </thead>
+    <tbody id="summary-stocks-by-name-body">
     </tbody>
   </table>
 </div>
@@ -817,6 +1049,35 @@ function showMessage(message, type = 'success') {
   }, 3000);
 }
 
+// Συνάρτηση υπολογισμού αθροίσματος από έκφραση
+function calculateExpression(expression) {
+  try {
+    // Αντικατάσταση ελληνικών κόμμα με τελείες
+    expression = expression.replace(/,/g, '.');
+    // Αντικατάσταση πολλαπλών συν στο τέλος
+    expression = expression.replace(/\+\s*$/g, '');
+    
+    if (!expression.trim()) return 0;
+    
+    // Διαχωρισμός με +
+    const parts = expression.split('+').map(part => part.trim());
+    let total = 0;
+    
+    for (let part of parts) {
+      if (part) {
+        const num = parseFloat(part);
+        if (!isNaN(num)) {
+          total += num;
+        }
+      }
+    }
+    
+    return total;
+  } catch (e) {
+    return 0;
+  }
+}
+
 // Προσθήκη γραμμής αγοράς
 function addPurchaseRow(portfolio, data = {}) {
   const tbody = document.querySelector(`#${portfolio}-purchases tbody`);
@@ -831,7 +1092,7 @@ function addPurchaseRow(portfolio, data = {}) {
     <td><input type="number" min="0" step="1" value="${data.qty || 0}" class="purchase-qty" /></td>
     <td><input type="number" min="0" step="0.01" value="${data.buyPrice || 0.00}" class="purchase-price" /></td>
     <td class="purchaseValue">0.00</td>
-    <td><input type="number" min="0" step="0.01" value="${data.commission || 0.00}" class="purchase-commission" placeholder="Προμήθεια" /></td>
+    <td><input type="text" value="${data.commission || ''}" class="purchase-commission commission-input" placeholder="15+7+2,47+6,28" /></td>
     <td class="totalCost">0.00</td>
     <td><input type="number" min="0" step="0.01" value="${data.currentPrice || 0.00}" class="current-price current-price-input" placeholder="Τρέχουσα τιμή" /></td>
     <td class="currentValue">0.00</td>
@@ -844,7 +1105,16 @@ function addPurchaseRow(portfolio, data = {}) {
   
   // Προσθήκη event listeners
   row.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', () => calculatePortfolio(portfolio));
+    if (input.classList.contains('purchase-commission')) {
+      input.addEventListener('input', () => {
+        // Ενημέρωση της τιμής με το υπολογισμένο άθροισμα
+        const calculatedValue = calculateExpression(input.value);
+        input.title = `Σύνολο: ${calculatedValue.toFixed(2)}€`;
+        calculatePortfolio(portfolio);
+      });
+    } else {
+      input.addEventListener('input', () => calculatePortfolio(portfolio));
+    }
   });
   
   calculatePortfolio(portfolio);
@@ -864,7 +1134,7 @@ function addSaleRow(portfolio, data = {}) {
     <td><input type="number" min="0" step="1" value="${data.qty || 0}" class="sale-qty" /></td>
     <td><input type="number" min="0" step="0.01" value="${data.salePrice || 0.00}" class="sale-price" /></td>
     <td class="saleValue">0.00</td>
-    <td><input type="number" min="0" step="0.01" value="${data.commission || 0.00}" class="sale-commission" placeholder="Προμήθεια" /></td>
+    <td><input type="text" value="${data.commission || ''}" class="sale-commission sale-commission-input" placeholder="15+7+2,47+6,28" /></td>
     <td class="netProceeds">0.00</td>
     <td class="pl">0.00</td>
     <td><button onclick="deleteRow(this, '${portfolio}', 'sale')" class="delete" style="padding: 3px 8px; font-size:12px; background:#e74c3c; color:white; border:none; border-radius:4px; cursor:pointer;">✕</button></td>
@@ -874,7 +1144,16 @@ function addSaleRow(portfolio, data = {}) {
   
   // Προσθήκη event listeners
   row.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', () => calculatePortfolio(portfolio));
+    if (input.classList.contains('sale-commission')) {
+      input.addEventListener('input', () => {
+        // Ενημέρωση της τιμής με το υπολογισμένο άθροισμα
+        const calculatedValue = calculateExpression(input.value);
+        input.title = `Σύνολο: ${calculatedValue.toFixed(2)}€`;
+        calculatePortfolio(portfolio);
+      });
+    } else {
+      input.addEventListener('input', () => calculatePortfolio(portfolio));
+    }
   });
   
   calculatePortfolio(portfolio);
@@ -898,7 +1177,7 @@ function deleteRow(button, portfolio, type) {
   calculatePortfolio(portfolio);
 }
 
-// Υπολογισμός πορτοφολίου με πλήρες ιστορικό
+// Υπολογισμός πορτοφολίου με πλήρες ιστορικό και αναλυτικές πληροφορίες ανά μετοχή
 function calculatePortfolio(portfolio) {
   let totalPurchaseQty = 0;
   let totalPurchaseValue = 0;
@@ -924,7 +1203,8 @@ function calculatePortfolio(portfolio) {
     const stockName = row.querySelector('.stock-name').value.trim();
     const qty = Number(row.querySelector('.purchase-qty').value) || 0;
     const price = Number(row.querySelector('.purchase-price').value) || 0;
-    const commission = Number(row.querySelector('.purchase-commission').value) || 0;
+    const commissionExpression = row.querySelector('.purchase-commission').value || '';
+    const commission = calculateExpression(commissionExpression);
     const currentPrice = Number(row.querySelector('.current-price').value) || 0;
     const dividend = Number(row.querySelector('.dividend').value) || 0;
     
@@ -976,7 +1256,8 @@ function calculatePortfolio(portfolio) {
     const stockName = row.querySelector('.sale-stock-name').value.trim();
     const qty = Number(row.querySelector('.sale-qty').value) || 0;
     const price = Number(row.querySelector('.sale-price').value) || 0;
-    const commission = Number(row.querySelector('.sale-commission').value) || 0;
+    const commissionExpression = row.querySelector('.sale-commission').value || '';
+    const commission = calculateExpression(commissionExpression);
     
     const saleValue = qty * price;
     const netProceeds = saleValue - commission;
@@ -1030,7 +1311,7 @@ function calculatePortfolio(portfolio) {
     let remainingCost = stock.totalPurchaseCost;
     let soldShares = 0;
     
-    // Ταξινόμηση αγορών κατά ημερομηνία (FIFO)
+    // Ταξινόμηση αγορών (FIFO)
     stock.purchases.sort((a, b) => a.date - b.date);
     
     // Για κάθε πώληση
@@ -1062,7 +1343,7 @@ function calculatePortfolio(portfolio) {
   const totalPL = totalCurrentValue + totalNetProceeds + totalDividends - totalPurchaseCost;
   const totalPLPercent = totalPurchaseCost > 0 ? (totalPL / totalPurchaseCost * 100) : 0;
   
-  // Μέση τιμή κόστους ανά τεμάχιο
+  // Μέση τιμή κόστους ανά τεμάχιο - Ανα μετοχή ξεχωριστά
   const avgCostPrice = totalPurchaseQty > 0 ? totalPurchaseCost / totalPurchaseQty : 0;
   
   // Ενημέρωση συνολικών αγορών
@@ -1080,7 +1361,7 @@ function calculatePortfolio(portfolio) {
   document.getElementById(`${portfolio}-total-sale-value`).innerText = totalSaleValue.toFixed(2);
   document.getElementById(`${portfolio}-total-sale-commissions`).innerText = totalSaleCommissions.toFixed(2);
   document.getElementById(`${portfolio}-total-net-proceeds`).innerText = totalNetProceeds.toFixed(2);
-  document.getElementById(`${portfolio}-total-sale-pl`).innerHTML = `<span class="${totalSalePL >= 0 ? 'profit' : 'loss'}">${totalSalePL.toFixed(2)}</span>`;
+  document.getElementById(`${portfolio}-total-sale-pl`).innerHTML = `<span class="${totalSalePL >= 0 ? 'profit' : 'loss'} bold-pl">${totalSalePL.toFixed(2)}</span>`;
   
   // Ενημέρωση συνολικών υπολογισμών πορτοφολίου
   document.getElementById(`${portfolio}-held-shares`).innerText = heldShares;
@@ -1088,11 +1369,19 @@ function calculatePortfolio(portfolio) {
   document.getElementById(`${portfolio}-total-cost`).innerText = totalPurchaseCost.toFixed(2);
   document.getElementById(`${portfolio}-current-value`).innerText = totalCurrentValue.toFixed(2);
   document.getElementById(`${portfolio}-total-dividends-sum`).innerText = totalDividends.toFixed(2);
-  document.getElementById(`${portfolio}-total-PL`).innerHTML = `<span class="${totalPL >= 0 ? 'profit' : 'loss'}">${totalPL.toFixed(2)}</span>`;
-  document.getElementById(`${portfolio}-total-PLPercent`).innerHTML = `<span class="${totalPLPercent >= 0 ? 'profit' : 'loss'}">${totalPLPercent.toFixed(2)}%</span>`;
+  
+  // Bold κέρδη/ζημίες με έντονη γραμματοσειρά
+  const plElement = document.getElementById(`${portfolio}-total-PL`);
+  const plPercentElement = document.getElementById(`${portfolio}-total-PLPercent`);
+  
+  plElement.innerHTML = `<span class="${totalPL >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPL.toFixed(2)}</span>`;
+  plPercentElement.innerHTML = `<span class="${totalPLPercent >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPLPercent.toFixed(2)}%</span>`;
   
   // Ενημέρωση πλήρους ιστορικού ανά μετοχή
   updateStockHistory(portfolio, stockHistory);
+  
+  // Ενημέρωση πλήρους ιστορικού για πωληθείσες ολόκληρες μετοχές
+  updateSoldStockHistory(portfolio, stockHistory);
   
   // Αποθήκευση
   savePortfolioData(portfolio);
@@ -1124,9 +1413,22 @@ function updateStockHistory(portfolio, stockHistory) {
       statusClass = 'status-active';
     }
     
-    // Υπολογισμός τελικού κέρδους/ζημίας
-    const totalPL = stock.totalSaleProceeds + stock.totalDividends - stock.totalPurchaseCost;
-    const totalPLPercent = stock.totalPurchaseCost > 0 ? (totalPL / stock.totalPurchaseCost * 100) : 0;
+    // Υπολογισμός τελικού κέρδους/ζημίας (μόνο αν υπήρξαν πωλήσεις)
+    let totalPL = 0;
+    let totalPLPercent = 0;
+    let plDisplay = '-';
+    let plPercentDisplay = '-';
+    
+    if (stock.totalSoldQty > 0) {
+      totalPL = stock.totalSaleProceeds + stock.totalDividends - stock.totalPurchaseCost;
+      totalPLPercent = stock.totalPurchaseCost > 0 ? (totalPL / stock.totalPurchaseCost * 100) : 0;
+      
+      plDisplay = `<span class="${totalPL >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPL.toFixed(2)}</span>`;
+      plPercentDisplay = `<span class="${totalPLPercent >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPLPercent.toFixed(2)}%</span>`;
+    } else {
+      plDisplay = '<span class="no-pl">-</span>';
+      plPercentDisplay = '<span class="no-pl">-</span>';
+    }
     
     const row = document.createElement('tr');
     if (heldShares === 0) {
@@ -1142,16 +1444,56 @@ function updateStockHistory(portfolio, stockHistory) {
       <td>${stock.totalPurchaseCost.toFixed(2)}</td>
       <td>${stock.totalDividends.toFixed(2)}</td>
       <td>${stock.totalSaleProceeds.toFixed(2)}</td>
-      <td><span class="${totalPL >= 0 ? 'profit' : 'loss'}">${totalPL.toFixed(2)}</span></td>
-      <td><span class="${totalPLPercent >= 0 ? 'profit' : 'loss'}">${totalPLPercent.toFixed(2)}%</span></td>
+      <td>${plDisplay}</td>
+      <td>${plPercentDisplay}</td>
     `;
     
-    tbody.appendChild(row);
+    // Προσθήκη μόνο αν δεν είναι πλήρως πωλημένη ή αν είναι ενεργή/μερική
+    if (heldShares > 0 || stock.totalSoldQty < stock.totalPurchasedQty) {
+      tbody.appendChild(row);
+    }
+  });
+}
+
+// Ενημέρωση πλήρους ιστορικού για πωληθείσες ολόκληρες μετοχές
+function updateSoldStockHistory(portfolio, stockHistory) {
+  const tbody = document.getElementById(`${portfolio}-sold-stock-history-body`);
+  tbody.innerHTML = '';
+  
+  Object.keys(stockHistory).forEach(stockName => {
+    const stock = stockHistory[stockName];
+    const heldShares = stock.totalPurchasedQty - stock.totalSoldQty;
+    
+    // Προσθήκη μόνο αν είναι πλήρως πωλημένη (100%)
+    if (heldShares === 0 && stock.totalPurchasedQty > 0) {
+      // Υπολογισμός τελικού κέρδους/ζημίας
+      const totalPL = stock.totalSaleProceeds + stock.totalDividends - stock.totalPurchaseCost;
+      const totalPLPercent = stock.totalPurchaseCost > 0 ? (totalPL / stock.totalPurchaseCost * 100) : 0;
+      
+      const row = document.createElement('tr');
+      row.classList.add('fully-sold-row');
+      
+      row.innerHTML = `
+        <td><strong>${stockName}</strong></td>
+        <td>${stock.totalPurchasedQty}</td>
+        <td>${stock.totalSoldQty}</td>
+        <td>${stock.totalPurchaseCost.toFixed(2)}</td>
+        <td>${stock.totalDividends.toFixed(2)}</td>
+        <td>${stock.totalSaleProceeds.toFixed(2)}</td>
+        <td><span class="${totalPL >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPL.toFixed(2)}</span></td>
+        <td><span class="${totalPLPercent >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPLPercent.toFixed(2)}%</span></td>
+      `;
+      
+      tbody.appendChild(row);
+    }
   });
 }
 
 // Ενημέρωση σύνοψης όλων των πορτοφολίων
 function updateSummary() {
+  const allStocksByOwner = {};
+  const allStocksByName = {};
+  
   portfolios.forEach(portfolio => {
     const heldShares = parseInt(document.getElementById(`${portfolio}-held-shares`).innerText) || 0;
     const totalCost = parseFloat(document.getElementById(`${portfolio}-total-cost`).innerText) || 0;
@@ -1161,13 +1503,58 @@ function updateSummary() {
     const totalPL = parseFloat(document.getElementById(`${portfolio}-total-PL`).innerText) || 0;
     const totalPLPercent = parseFloat(document.getElementById(`${portfolio}-total-PLPercent`).innerText) || 0;
     
+    // Συλλογή δεδομένων για σύνολο μετοχών ανά κάτοχο
+    allStocksByOwner[portfolio] = {
+      name: portfolio.toUpperCase(),
+      uniqueStocks: 0,
+      heldShares: heldShares,
+      totalCost: totalCost,
+      currentValue: currentValue
+    };
+    
+    // Συλλογή δεδομένων από τις αγορές για στατιστικά ανά μετοχή
+    const purchaseRows = document.querySelectorAll(`#${portfolio}-purchases tbody tr`);
+    const stockSet = new Set();
+    
+    purchaseRows.forEach(row => {
+      const stockName = row.querySelector('.stock-name').value.trim();
+      if (stockName) {
+        stockSet.add(stockName);
+        
+        // Προσθήκη στο συνολικό ανά μετοχή - ξεχωριστά για κάθε κάτοχο
+        const key = `${stockName}_${portfolio}`;
+        const qty = Number(row.querySelector('.purchase-qty').value) || 0;
+        const totalCostCell = row.querySelector('.totalCost');
+        const totalCostForStock = parseFloat(totalCostCell.innerText) || 0;
+        const currentValueCell = row.querySelector('.currentValue');
+        const currentValueForStock = parseFloat(currentValueCell.innerText) || 0;
+        const dividend = Number(row.querySelector('.dividend').value) || 0;
+        
+        allStocksByName[key] = {
+          stockName: stockName,
+          owner: portfolio,
+          qty: qty,
+          totalCost: totalCostForStock,
+          currentValue: currentValueForStock,
+          dividend: dividend
+        };
+      }
+    });
+    
+    allStocksByOwner[portfolio].uniqueStocks = stockSet.size;
+    
     document.getElementById(`summary-${portfolio}-held`).innerText = heldShares;
     document.getElementById(`summary-${portfolio}-cost`).innerText = totalCost.toFixed(2);
     document.getElementById(`summary-${portfolio}-proceeds`).innerText = totalNetProceeds.toFixed(2);
     document.getElementById(`summary-${portfolio}-current`).innerText = currentValue.toFixed(2);
     document.getElementById(`summary-${portfolio}-dividends`).innerText = totalDividends.toFixed(2);
-    document.getElementById(`summary-${portfolio}-pl`).innerText = totalPL.toFixed(2);
-    document.getElementById(`summary-${portfolio}-plpercent`).innerText = totalPLPercent.toFixed(2) + '%';
+    
+    // Bold κέρδη/ζημίες με έντονη γραμματοσειρά
+    const plElement = document.getElementById(`summary-${portfolio}-pl`);
+    const plPercentElement = document.getElementById(`summary-${portfolio}-plpercent`);
+    
+    plElement.innerHTML = `<span class="${totalPL >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPL.toFixed(2)}</span>`;
+    plPercentElement.innerHTML = `<span class="${totalPLPercent >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPLPercent.toFixed(2)}%</span>`;
   });
   
   // Υπολογισμός συνολικών
@@ -1194,8 +1581,95 @@ function updateSummary() {
   document.getElementById('summary-total-proceeds').innerText = totalProceedsAll.toFixed(2);
   document.getElementById('summary-total-current').innerText = currentValueAll.toFixed(2);
   document.getElementById('summary-total-dividends').innerText = totalDividendsAll.toFixed(2);
-  document.getElementById('summary-total-pl').innerHTML = `<span class="${totalPLAll >= 0 ? 'profit' : 'loss'}">${totalPLAll.toFixed(2)}</span>`;
-  document.getElementById('summary-total-plpercent').innerHTML = `<span class="${totalPLPercentAll >= 0 ? 'profit' : 'loss'}">${totalPLPercentAll.toFixed(2)}%</span>`;
+  
+  // Bold κέρδη/ζημίες με έντονη γραμματοσειρά για το σύνολο
+  const totalPlElement = document.getElementById('summary-total-pl');
+  const totalPlPercentElement = document.getElementById('summary-total-plpercent');
+  
+  totalPlElement.innerHTML = `<span class="${totalPLAll >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPLAll.toFixed(2)}</span>`;
+  totalPlPercentElement.innerHTML = `<span class="${totalPLPercentAll >= 0 ? 'final-pl-profit' : 'final-pl-loss'} final-pl">${totalPLPercentAll.toFixed(2)}%</span>`;
+  
+  // Ενημέρωση πίνακα σύνολο μετοχών ανά κάτοχο
+  const ownerTbody = document.getElementById('summary-stocks-by-owner-body');
+  ownerTbody.innerHTML = '';
+  
+  portfolios.forEach(portfolio => {
+    const ownerData = allStocksByOwner[portfolio];
+    const row = document.createElement('tr');
+    
+    row.innerHTML = `
+      <td><span class="owner-${portfolio}">${ownerData.name}</span></td>
+      <td>${ownerData.uniqueStocks}</td>
+      <td>${ownerData.heldShares}</td>
+      <td>${ownerData.totalCost.toFixed(2)}</td>
+      <td>${ownerData.currentValue.toFixed(2)}</td>
+    `;
+    
+    ownerTbody.appendChild(row);
+  });
+  
+  // Ενημέρωση πίνακα σύνολο μετοχών ανά όνομα μετοχής
+  const nameTbody = document.getElementById('summary-stocks-by-name-body');
+  nameTbody.innerHTML = '';
+  
+  // Ομαδοποίηση μετοχών ανά όνομα και κάτοχο (ξεκινάμε με διαχωρισμό)
+  const stocksByOwnerAndName = {};
+  
+  Object.keys(allStocksByName).forEach(key => {
+    const stockData = allStocksByName[key];
+    const ownerKey = stockData.owner;
+    const stockName = stockData.stockName;
+    
+    if (!stocksByOwnerAndName[ownerKey]) {
+      stocksByOwnerAndName[ownerKey] = {};
+    }
+    
+    if (!stocksByOwnerAndName[ownerKey][stockName]) {
+      stocksByOwnerAndName[ownerKey][stockName] = {
+        stockName: stockName,
+        owner: ownerKey,
+        totalQty: 0,
+        totalCost: 0,
+        totalCurrentValue: 0,
+        totalDividend: 0
+      };
+    }
+    
+    stocksByOwnerAndName[ownerKey][stockName].totalQty += stockData.qty;
+    stocksByOwnerAndName[ownerKey][stockName].totalCost += stockData.totalCost;
+    stocksByOwnerAndName[ownerKey][stockName].totalCurrentValue += stockData.currentValue;
+    stocksByOwnerAndName[ownerKey][stockName].totalDividend += stockData.dividend;
+  });
+  
+  // Προσθήκη στοιχείων στον πίνακα - ξεχωριστά γραμμή για κάθε κάτοχο
+  Object.keys(stocksByOwnerAndName).forEach(ownerKey => {
+    const ownerStocks = stocksByOwnerAndName[ownerKey];
+    
+    Object.keys(ownerStocks).forEach(stockName => {
+      const stockData = ownerStocks[stockName];
+      const row = document.createElement('tr');
+      
+      let ownerDisplay = '';
+      if (ownerKey === 'mitsos') {
+        ownerDisplay = '<span class="owner-mitsos">ΜΗΤΣΟΣ</span>';
+      } else if (ownerKey === 'aderfoula') {
+        ownerDisplay = '<span class="owner-aderfoula">ΑΔΕΡΦΟΥΛΑ</span>';
+      } else if (ownerKey === 'father') {
+        ownerDisplay = '<span class="owner-father">FATHER</span>';
+      }
+      
+      row.innerHTML = `
+        <td><strong>${stockData.stockName}</strong></td>
+        <td>${ownerDisplay}</td>
+        <td>${stockData.totalQty}</td>
+        <td>${stockData.totalCost.toFixed(2)}</td>
+        <td>${stockData.totalCurrentValue.toFixed(2)}</td>
+        <td>${stockData.totalDividend.toFixed(2)}</td>
+      `;
+      
+      nameTbody.appendChild(row);
+    });
+  });
 }
 
 // Αποθήκευση δεδομένων πορτοφολίου
