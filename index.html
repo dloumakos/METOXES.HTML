@@ -1104,18 +1104,21 @@ function addPurchaseRow(portfolio, data = {}) {
   tbody.appendChild(row);
   
   // Προσθήκη event listeners
-  row.querySelectorAll('input').forEach(input => {
-    if (input.classList.contains('purchase-commission')) {
-      input.addEventListener('input', () => {
-        // Ενημέρωση της τιμής με το υπολογισμένο άθροισμα
-        const calculatedValue = calculateExpression(input.value);
-        input.title = `Σύνολο: ${calculatedValue.toFixed(2)}€`;
-        calculatePortfolio(portfolio);
-      });
-    } else {
-      input.addEventListener('input', () => calculatePortfolio(portfolio));
-    }
-  });
+ row.querySelectorAll('input').forEach(input => {
+  if (input.classList.contains('purchase-commission')) {
+    input.addEventListener('input', () => {
+      const calculatedValue = calculateExpression(input.value);
+      input.title = `Σύνολο: ${calculatedValue.toFixed(2)}€`;
+      calculatePortfolio(portfolio);
+      savePortfolioData(portfolio); // ΑΥΤΟΜΑΤΗ ΑΠΟΘΗΚΕΥΣΗ
+    });
+  } else {
+    input.addEventListener('input', () => {
+      calculatePortfolio(portfolio);
+      savePortfolioData(portfolio); // ΑΥΤΟΜΑΤΗ ΑΠΟΘΗΚΕΥΣΗ
+    });
+  }
+});
   
   calculatePortfolio(portfolio);
 }
@@ -1143,18 +1146,21 @@ function addSaleRow(portfolio, data = {}) {
   tbody.appendChild(row);
   
   // Προσθήκη event listeners
-  row.querySelectorAll('input').forEach(input => {
-    if (input.classList.contains('sale-commission')) {
-      input.addEventListener('input', () => {
-        // Ενημέρωση της τιμής με το υπολογισμένο άθροισμα
-        const calculatedValue = calculateExpression(input.value);
-        input.title = `Σύνολο: ${calculatedValue.toFixed(2)}€`;
-        calculatePortfolio(portfolio);
-      });
-    } else {
-      input.addEventListener('input', () => calculatePortfolio(portfolio));
-    }
-  });
+ row.querySelectorAll('input').forEach(input => {
+  if (input.classList.contains('sale-commission')) {
+    input.addEventListener('input', () => {
+      const calculatedValue = calculateExpression(input.value);
+      input.title = `Σύνολο: ${calculatedValue.toFixed(2)}€`;
+      calculatePortfolio(portfolio);
+      savePortfolioData(portfolio); // ΑΥΤΟΜΑΤΗ ΑΠΟΘΗΚΕΥΣΗ
+    });
+  } else {
+    input.addEventListener('input', () => {
+      calculatePortfolio(portfolio);
+      savePortfolioData(portfolio); // ΑΥΤΟΜΑΤΗ ΑΠΟΘΗΚΕΥΣΗ
+    });
+  }
+});
   
   calculatePortfolio(portfolio);
 }
@@ -1175,6 +1181,7 @@ function deleteRow(button, portfolio, type) {
   });
   
   calculatePortfolio(portfolio);
+savePortfolioData(portfolio); // ΑΥΤΟΜΑΤΗ ΑΠΟΘΗΚΕΥΣΗ
 }
 
 // Υπολογισμός πορτοφολίου με πλήρες ιστορικό και αναλυτικές πληροφορίες ανά μετοχή
@@ -1673,48 +1680,53 @@ function updateSummary() {
 }
 
 // Αποθήκευση δεδομένων πορτοφολίου
-function savePortfolioData(portfolio) {
+ function savePortfolioData(portfolio) {
+  console.log(`🔧 ΚΛΗΘΗΚΕ η savePortfolioData για ${portfolio}`);
   const data = {
     purchases: [],
-    sales: []
-  };
+    sales: [] 
+};
   
   // Αποθήκευση αγορών
   document.querySelectorAll(`#${portfolio}-purchases tbody tr`).forEach(row => {
-    const inputs = row.querySelectorAll('input');
-    data.purchases.push({
-      date: inputs[0].value,
-      name: inputs[1].value,
-      qty: inputs[2].value,
-      buyPrice: inputs[3].value,
-      commission: inputs[5].value,
-      currentPrice: inputs[7].value,
-      dividendDate: inputs[9].value,
-      dividend: inputs[10].value
-    });
+  console.log(`📥 Βρήκα γραμμή αγοράς, inputs: ${row.querySelectorAll('input').length}`);
+  const inputs = row.querySelectorAll('input');
+    
+    // Έλεγχος αν υπάρχουν αρκετά inputs (12 inputs συνολικά)
+    if (inputs.length >= 8) {  // Από 11 σε 8
+      data.purchases.push({
+        date: inputs[0]?.value || '',
+        name: inputs[1]?.value || '',
+        qty: inputs[2]?.value || '0',
+        buyPrice: inputs[3]?.value || '0.00',
+        commission: inputs[5]?.value || '',
+        currentPrice: inputs[7]?.value || '0.00',
+        dividendDate: inputs[9]?.value || '',
+        dividend: inputs[10]?.value || '0.00'
+      });
+    }
   });
   
   // Αποθήκευση πωλήσεων
   document.querySelectorAll(`#${portfolio}-sales tbody tr`).forEach(row => {
-    const inputs = row.querySelectorAll('input');
-    data.sales.push({
-      date: inputs[0].value,
-      name: inputs[1].value,
-      qty: inputs[2].value,
-      salePrice: inputs[3].value,
-      commission: inputs[5].value
-    });
+  console.log(`📤 Βρήκα γραμμή πώλησης, inputs: ${row.querySelectorAll('input').length}`);
+  const inputs = row.querySelectorAll('input');
+    
+    // Έλεγχος αν υπάρχουν αρκετά inputs (6 inputs συνολικά)
+    if (inputs.length >= 5) {  // Από 6 σε 5
+      data.sales.push({
+        date: inputs[0]?.value || '',
+        name: inputs[1]?.value || '',
+        qty: inputs[2]?.value || '0',
+        salePrice: inputs[3]?.value || '0.00',
+        commission: inputs[5]?.value || ''
+      });
+    }
   });
   
-  localStorage.setItem(`portfolio_${portfolio}`, JSON.stringify(data));
+  console.log(`💾 ΑΠΟΘΗΚΕΥΣΗ ${portfolio}: ${data.purchases.length} αγορές, ${data.sales.length} πωλήσεις`);
+localStorage.setItem(`portfolio_${portfolio}`, JSON.stringify(data));
 }
-
-// Αποθήκευση ενός συγκεκριμένου πορτοφολίου
-function savePortfolio(portfolio) {
-  savePortfolioData(portfolio);
-  showMessage(`✅ Το πορτοφόλιο ${portfolio.toUpperCase()} αποθηκεύτηκε επιτυχώς!`);
-}
-
 // Αποθήκευση όλων των δεδομένων
 function saveAllData() {
   portfolios.forEach(portfolio => {
@@ -1790,4 +1802,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 </body>
-</html>
+  </html>
