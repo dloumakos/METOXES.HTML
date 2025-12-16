@@ -556,7 +556,7 @@
       <tr class="purchase-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΑΓΟΡΩΝ:</strong></td>
         <td id="mitsos-total-purchase-qty">0</td>
-        <td id="mitsos-avg-purchase-price">0.00</td>
+        <td>-</td>
         <td id="mitsos-total-purchase-value">0.00</td>
         <td id="mitsos-total-purchase-commissions">0.00</td>
         <td id="mitsos-total-purchase-cost">0.00</td>
@@ -590,7 +590,7 @@
       <tr class="sale-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΠΩΛΗΣΕΩΝ:</strong></td>
         <td id="mitsos-total-sale-qty">0</td>
-        <td id="mitsos-avg-sale-price">0.00</td>
+        <td>-</td>
         <td id="mitsos-total-sale-value">0.00</td>
         <td id="mitsos-total-sale-commissions">0.00</td>
         <td id="mitsos-total-net-proceeds">0.00</td>
@@ -699,7 +699,7 @@
       <tr class="purchase-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΑΓΟΡΩΝ:</strong></td>
         <td id="aderfoula-total-purchase-qty">0</td>
-        <td id="aderfoula-avg-purchase-price">0.00</td>
+        <td>-</td>
         <td id="aderfoula-total-purchase-value">0.00</td>
         <td id="aderfoula-total-purchase-commissions">0.00</td>
         <td id="aderfoula-total-purchase-cost">0.00</td>
@@ -733,7 +733,7 @@
       <tr class="sale-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΠΩΛΗΣΕΩΝ:</strong></td>
         <td id="aderfoula-total-sale-qty">0</td>
-        <td id="aderfoula-avg-sale-price">0.00</td>
+        <td>-</td>
         <td id="aderfoula-total-sale-value">0.00</td>
         <td id="aderfoula-total-sale-commissions">0.00</td>
         <td id="aderfoula-total-net-proceeds">0.00</td>
@@ -842,7 +842,7 @@
       <tr class="purchase-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΑΓΟΡΩΝ:</strong></td>
         <td id="father-total-purchase-qty">0</td>
-        <td id="father-avg-purchase-price">0.00</td>
+        <td>-</td>
         <td id="father-total-purchase-value">0.00</td>
         <td id="father-total-purchase-commissions">0.00</td>
         <td id="father-total-purchase-cost">0.00</td>
@@ -876,7 +876,7 @@
       <tr class="sale-totals-row">
         <td colspan="3"><strong>ΣΥΝΟΛΟ ΠΩΛΗΣΕΩΝ:</strong></td>
         <td id="father-total-sale-qty">0</td>
-        <td id="father-avg-sale-price">0.00</td>
+        <td>-</td>
         <td id="father-total-sale-value">0.00</td>
         <td id="father-total-sale-commissions">0.00</td>
         <td id="father-total-net-proceeds">0.00</td>
@@ -1339,8 +1339,7 @@ function calculatePortfolio(portfolio) {
   const heldShares = totalPurchaseQty - totalSaleQty;
   
   // Υπολογισμός μέσης τιμής αγοράς
-  const avgPurchasePrice = totalPurchaseQty > 0 ? totalPurchaseValue / totalPurchaseQty : 0;
-  const avgSalePrice = totalSaleQty > 0 ? totalSaleValue / totalSaleQty : 0;
+  
   
   // Υπολογισμός συνολικού κέρδους/ζημίας με FIFO (First In First Out) μέθοδο
   Object.keys(stockHistory).forEach(stockName => {
@@ -1388,7 +1387,6 @@ function calculatePortfolio(portfolio) {
   
   // Ενημέρωση συνολικών αγορών
   document.getElementById(`${portfolio}-total-purchase-qty`).innerText = totalPurchaseQty;
-  document.getElementById(`${portfolio}-avg-purchase-price`).innerText = avgPurchasePrice.toFixed(2);
   document.getElementById(`${portfolio}-total-purchase-value`).innerText = totalPurchaseValue.toFixed(2);
   document.getElementById(`${portfolio}-total-purchase-commissions`).innerText = totalPurchaseCommissions.toFixed(2);
   document.getElementById(`${portfolio}-total-purchase-cost`).innerText = totalPurchaseCost.toFixed(2);
@@ -1397,7 +1395,6 @@ function calculatePortfolio(portfolio) {
   
   // Ενημέρωση συνολικών πωλήσεων
   document.getElementById(`${portfolio}-total-sale-qty`).innerText = totalSaleQty;
-  document.getElementById(`${portfolio}-avg-sale-price`).innerText = avgSalePrice.toFixed(2);
   document.getElementById(`${portfolio}-total-sale-value`).innerText = totalSaleValue.toFixed(2);
   document.getElementById(`${portfolio}-total-sale-commissions`).innerText = totalSaleCommissions.toFixed(2);
   document.getElementById(`${portfolio}-total-net-proceeds`).innerText = totalNetProceeds.toFixed(2);
