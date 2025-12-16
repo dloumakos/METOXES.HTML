@@ -493,6 +493,22 @@
     .separate-owner-row td {
         padding: 10px !important;
     }
+/* Μήνυμα αποθήκευσης */
+.save-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+}
   </style>
 </head>
 <body>
@@ -1039,16 +1055,33 @@ const portfolios = ['mitsos', 'aderfoula', 'father'];
 
 // Συνάρτηση εμφάνισης μηνύματος
 function showMessage(message, type = 'success') {
+  // Διαγράφουμε πρώτα οποιοδήποτε υπάρχον μήνυμα
+  const existingMessages = document.querySelectorAll('.save-message');
+  existingMessages.forEach(msg => msg.remove());
+  
   const messageDiv = document.createElement('div');
-  messageDiv.className = 'message';
+  messageDiv.className = 'save-message';
   messageDiv.textContent = message;
+  
+  // Προσθέτουμε διαφορετικό χρώμα ανάλογα με τον τύπο
+  if (type === 'error') {
+    messageDiv.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+  } else if (type === 'warning') {
+    messageDiv.style.background = 'linear-gradient(135deg, #f39c12, #e67e22)';
+  }
+  
   document.body.appendChild(messageDiv);
   
+  // Αφήνουμε το μήνυμα για 2 δευτερόλεπτα και μετά το αφαιρούμε
   setTimeout(() => {
-    messageDiv.remove();
-  }, 3000);
+    messageDiv.style.opacity = '0';
+    setTimeout(() => {
+      if (messageDiv.parentNode) {
+        messageDiv.remove();
+      }
+    }, 300);
+  }, 2000);
 }
-
 // Συνάρτηση υπολογισμού αθροίσματος από έκφραση
 function calculateExpression(expression) {
   try {
@@ -1799,7 +1832,13 @@ document.addEventListener('DOMContentLoaded', function() {
     calculatePortfolio(portfolio);
   });
 });
+
+// Συνάρτηση αποθήκευσης ενός πορτοφολίου
+function savePortfolio(portfolio) {
+  savePortfolioData(portfolio);
+  showMessage(`✅ Το πορτοφόλιο ${portfolio} αποθηκεύτηκε επιτυχώς!`);
+}
 </script>
 
 </body>
-  </html>
+</html>
